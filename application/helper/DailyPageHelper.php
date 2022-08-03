@@ -8,7 +8,7 @@ use DatePeriod;
 use DateTimeImmutable;
 use Exception;
 use Shaarli\Bookmark\Bookmark;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 
 class DailyPageHelper
 {

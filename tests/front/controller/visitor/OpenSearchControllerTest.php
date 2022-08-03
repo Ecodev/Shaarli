@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Shaarli\Front\Controller\Visitor;
 
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class OpenSearchControllerTest extends TestCase
@@ -24,7 +24,7 @@ class OpenSearchControllerTest extends TestCase
 
     public function testOpenSearchController(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         // Save RainTPL assigned variables

@@ -5,7 +5,7 @@ namespace Shaarli\Api\Controllers;
 use Shaarli\Api\ApiUtils;
 use Shaarli\Api\Exceptions\ApiBadParametersException;
 use Shaarli\Api\Exceptions\ApiLinkNotFoundException;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

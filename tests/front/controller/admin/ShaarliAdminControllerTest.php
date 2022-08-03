@@ -7,7 +7,7 @@ namespace Shaarli\Front\Controller\Admin;
 use Shaarli\Front\Exception\WrongTokenException;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 
 /**
  * Class ShaarliControllerTest
@@ -28,7 +28,7 @@ class ShaarliAdminControllerTest extends TestCase
 
         $this->controller = new class ($this->container) extends ShaarliAdminController
         {
-            public function checkToken(Request $request): bool
+            public function checkToken(ServerRequestInterface $request): bool
             {
                 return parent::checkToken($request);
             }
@@ -55,7 +55,7 @@ class ShaarliAdminControllerTest extends TestCase
      */
     public function testCheckTokenWithValidToken(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->with('token')->willReturn($token = '12345');
 
         $this->container->sessionManager = $this->createMock(SessionManager::class);
@@ -69,7 +69,7 @@ class ShaarliAdminControllerTest extends TestCase
      */
     public function testCheckTokenWithNotValidToken(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->with('token')->willReturn($token = '12345');
 
         $this->container->sessionManager = $this->createMock(SessionManager::class);

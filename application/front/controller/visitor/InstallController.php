@@ -10,7 +10,7 @@ use Shaarli\Front\Exception\ResourcePermissionException;
 use Shaarli\Helper\ApplicationUtils;
 use Shaarli\Languages;
 use Shaarli\Security\SessionManager;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

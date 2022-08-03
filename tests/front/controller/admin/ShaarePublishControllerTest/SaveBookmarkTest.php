@@ -13,7 +13,7 @@ use Shaarli\Http\HttpAccess;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
 use Shaarli\Thumbnailer;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class SaveBookmarkTest extends TestCase
@@ -46,7 +46,7 @@ class SaveBookmarkTest extends TestCase
             'returnurl' => 'http://shaarli/subfolder/admin/add-shaare'
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -132,7 +132,7 @@ class SaveBookmarkTest extends TestCase
             'returnurl' => 'http://shaarli/subfolder/?page=2'
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -213,7 +213,7 @@ class SaveBookmarkTest extends TestCase
     {
         $parameters = ['lf_url' => 'http://url.tld/other?part=3#hash'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -263,7 +263,7 @@ class SaveBookmarkTest extends TestCase
     {
         $parameters = ['lf_id' => '0'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -287,7 +287,7 @@ class SaveBookmarkTest extends TestCase
     {
         $parameters = ['lf_url' => 'http://url.tld/other?part=3#hash'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -332,7 +332,7 @@ class SaveBookmarkTest extends TestCase
     {
         $parameters = ['source' => 'bookmarklet'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -358,7 +358,7 @@ class SaveBookmarkTest extends TestCase
         $this->container->bookmarkService->expects(static::never())->method('addOrSet');
         $this->container->bookmarkService->expects(static::never())->method('set');
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->expectException(WrongTokenException::class);

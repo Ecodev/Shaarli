@@ -9,9 +9,9 @@ use Shaarli\Config\ConfigManager;
 use Shaarli\History;
 use Shaarli\Plugin\PluginManager;
 use Shaarli\Tests\Utils\ReferenceLinkDB;
-use Slim\Container;
+use Pimple\Container;
 use Slim\Http\Environment;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**
@@ -105,7 +105,7 @@ class GetTagsTest extends \Shaarli\TestCase
         $env = Environment::mock([
             'REQUEST_METHOD' => 'GET',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->getTags($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
@@ -139,7 +139,7 @@ class GetTagsTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'offset=1&limit=1'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getTags($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -159,7 +159,7 @@ class GetTagsTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'limit=all'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getTags($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -176,7 +176,7 @@ class GetTagsTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'offset=100'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getTags($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -193,7 +193,7 @@ class GetTagsTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'visibility=private'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getTags($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -215,7 +215,7 @@ class GetTagsTest extends \Shaarli\TestCase
                 'QUERY_STRING' => 'visibility=public'
             ]
         );
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getTags($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string)$response->getBody(), true);

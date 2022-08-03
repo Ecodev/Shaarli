@@ -8,7 +8,7 @@ use Shaarli\Bookmark\Bookmark;
 use Shaarli\Bookmark\SearchResult;
 use Shaarli\Feed\CachedPage;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class DailyControllerTest extends TestCase
@@ -32,7 +32,7 @@ class DailyControllerTest extends TestCase
         $previousDate = new \DateTime('2 days ago 00:00:00');
         $nextDate = new \DateTime('today 00:00:00');
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParam')->willReturnCallback(function (string $key) use ($currentDay): ?string {
             return $key === 'day' ? $currentDay->format('Ymd') : null;
         });
@@ -175,7 +175,7 @@ class DailyControllerTest extends TestCase
     {
         $currentDay = new \DateTimeImmutable('2020-05-13');
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParam')->willReturnCallback(function (string $key) use ($currentDay): ?string {
             return $key === 'day' ? $currentDay->format('Ymd') : null;
         });
@@ -241,7 +241,7 @@ class DailyControllerTest extends TestCase
     {
         $currentDay = new \DateTimeImmutable('2020-05-13');
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         // Save RainTPL assigned variables
@@ -300,7 +300,7 @@ class DailyControllerTest extends TestCase
      */
     public function testValidIndexControllerInvokeNoBookmark(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         // Save RainTPL assigned variables
@@ -347,7 +347,7 @@ class DailyControllerTest extends TestCase
             new \DateTimeImmutable('+1 month'),
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->bookmarkService->expects(static::once())->method('search')->willReturn(
@@ -431,7 +431,7 @@ class DailyControllerTest extends TestCase
      */
     public function testValidRssControllerInvokeTriggerCache(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->pageCacheManager->method('getCachePage')->willReturnCallback(function (): CachedPage {
@@ -455,7 +455,7 @@ class DailyControllerTest extends TestCase
      */
     public function testValidRssControllerInvokeNoBookmark(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->bookmarkService
@@ -486,7 +486,7 @@ class DailyControllerTest extends TestCase
         $currentDay = new \DateTimeImmutable('2020-05-13');
         $expectedDay = new \DateTimeImmutable('2020-05-11');
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParam')->willReturnCallback(function (string $key) use ($currentDay): ?string {
             return $key === 'week' ? $currentDay->format('YW') : null;
         });
@@ -546,7 +546,7 @@ class DailyControllerTest extends TestCase
         $currentDay = new \DateTimeImmutable('2020-05-13');
         $expectedDay = new \DateTimeImmutable('2020-05-01');
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParam')->willReturnCallback(function (string $key) use ($currentDay): ?string {
             return $key === 'month' ? $currentDay->format('Ym') : null;
         });
@@ -613,7 +613,7 @@ class DailyControllerTest extends TestCase
         ];
 
         $this->container->environment['QUERY_STRING'] = 'week';
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParam')->willReturnCallback(function (string $key): ?string {
             return $key === 'week' ? '' : null;
         });
@@ -676,7 +676,7 @@ class DailyControllerTest extends TestCase
         ];
 
         $this->container->environment['QUERY_STRING'] = 'month';
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParam')->willReturnCallback(function (string $key): ?string {
             return $key === 'month' ? '' : null;
         });

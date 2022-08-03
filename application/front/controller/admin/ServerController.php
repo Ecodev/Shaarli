@@ -6,7 +6,7 @@ namespace Shaarli\Front\Controller\Admin;
 
 use Shaarli\Helper\ApplicationUtils;
 use Shaarli\Helper\FileUtils;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

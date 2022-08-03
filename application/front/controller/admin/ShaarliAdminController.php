@@ -7,7 +7,7 @@ namespace Shaarli\Front\Controller\Admin;
 use Shaarli\Front\Controller\Visitor\ShaarliVisitorController;
 use Shaarli\Front\Exception\WrongTokenException;
 use Shaarli\Security\SessionManager;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 
 /**
  * Class ShaarliAdminController

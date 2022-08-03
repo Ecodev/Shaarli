@@ -6,7 +6,7 @@ namespace Shaarli\Front\Controller\Visitor;
 
 use Shaarli\Bookmark\BookmarkFilter;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**
@@ -25,7 +25,7 @@ class ShaarliVisitorControllerTest extends TestCase
     /** @var mixed[] List of variable assigned to the template */
     protected $assignedValues;
 
-    /** @var Request */
+    /** @var ServerRequestInterface */
     protected $request;
 
     public function setUp(): void
@@ -45,7 +45,7 @@ class ShaarliVisitorControllerTest extends TestCase
             }
 
             public function redirectFromReferer(
-                Request $request,
+                ServerRequestInterface $request,
                 Response $response,
                 array $loopTerms = [],
                 array $clearParams = [],
@@ -56,7 +56,7 @@ class ShaarliVisitorControllerTest extends TestCase
         };
         $this->assignedValues = [];
 
-        $this->request = $this->createMock(Request::class);
+        $this->request = $this->createMock(ServerRequest::class);
     }
 
     public function testAssignView(): void

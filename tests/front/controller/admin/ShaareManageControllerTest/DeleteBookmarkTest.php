@@ -13,7 +13,7 @@ use Shaarli\Front\Controller\Admin\ShaareManageController;
 use Shaarli\Http\HttpAccess;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class DeleteBookmarkTest extends TestCase
@@ -40,7 +40,7 @@ class DeleteBookmarkTest extends TestCase
 
         $this->container->environment['HTTP_REFERER'] = 'http://shaarli/subfolder/shaare/abcdef';
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -94,7 +94,7 @@ class DeleteBookmarkTest extends TestCase
 
         $this->container->environment['HTTP_REFERER'] = 'http://shaarli/subfolder/?searchtags=abcdef';
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -166,7 +166,7 @@ class DeleteBookmarkTest extends TestCase
     {
         $parameters = ['id' => '123'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -215,7 +215,7 @@ class DeleteBookmarkTest extends TestCase
     {
         $parameters = ['id' => '123 456 789'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -300,7 +300,7 @@ class DeleteBookmarkTest extends TestCase
     {
         $parameters = ['id' => 'nope not an ID'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -326,7 +326,7 @@ class DeleteBookmarkTest extends TestCase
      */
     public function testDeleteEmptyId(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager
@@ -351,7 +351,7 @@ class DeleteBookmarkTest extends TestCase
             'source' => 'bookmarklet',
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -393,7 +393,7 @@ class DeleteBookmarkTest extends TestCase
             'source' => 'batch',
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {

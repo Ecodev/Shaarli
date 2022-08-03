@@ -9,7 +9,7 @@ use Shaarli\Front\Controller\Admin\FrontAdminControllerMockHelper;
 use Shaarli\Front\Controller\Admin\ShaareManageController;
 use Shaarli\Http\HttpAccess;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**
@@ -36,7 +36,7 @@ class SharePrivateTest extends TestCase
     public function testSharePrivateWithNewPrivateBookmark(): void
     {
         $hash = 'abcdcef';
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $bookmark = (new Bookmark())
@@ -76,7 +76,7 @@ class SharePrivateTest extends TestCase
     {
         $hash = 'abcdcef';
         $existingKey = 'this is a private key';
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $bookmark = (new Bookmark())
@@ -110,7 +110,7 @@ class SharePrivateTest extends TestCase
     public function testSharePrivateWithPublicBookmark(): void
     {
         $hash = 'abcdcef';
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $bookmark = (new Bookmark())

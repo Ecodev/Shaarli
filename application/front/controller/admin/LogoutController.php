@@ -6,7 +6,7 @@ namespace Shaarli\Front\Controller\Admin;
 
 use Shaarli\Security\CookieManager;
 use Shaarli\Security\LoginManager;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

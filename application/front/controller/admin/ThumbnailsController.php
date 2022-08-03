@@ -6,7 +6,7 @@ namespace Shaarli\Front\Controller\Admin;
 
 use Shaarli\Bookmark\Exception\BookmarkNotFoundException;
 use Shaarli\Render\TemplatePage;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**
@@ -45,7 +45,7 @@ class ThumbnailsController extends ShaarliAdminController
      */
     public function ajaxUpdate(Request $request, Response $response, array $args): Response
     {
-        $id = $args['id'] ?? null;
+        $id = $args['id'] ?? '';
 
         if (false === ctype_digit($id)) {
             return $response->withStatus(400);

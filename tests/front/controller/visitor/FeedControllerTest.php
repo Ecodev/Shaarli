@@ -6,7 +6,7 @@ namespace Shaarli\Front\Controller\Visitor;
 
 use Shaarli\Feed\FeedBuilder;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class FeedControllerTest extends TestCase
@@ -30,7 +30,7 @@ class FeedControllerTest extends TestCase
      */
     public function testDefaultRssController(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->feedBuilder->expects(static::once())->method('setLocale');
@@ -71,7 +71,7 @@ class FeedControllerTest extends TestCase
      */
     public function testDefaultAtomController(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->feedBuilder->expects(static::once())->method('setLocale');
@@ -112,7 +112,7 @@ class FeedControllerTest extends TestCase
      */
     public function testAtomControllerWithParameters(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParams')->willReturn(['parameter' => 'value']);
         $response = new Response();
 

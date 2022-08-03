@@ -3,7 +3,7 @@
 namespace Shaarli\Api\Controllers;
 
 use Shaarli\Api\Exceptions\ApiBadParametersException;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**
@@ -30,7 +30,7 @@ class HistoryController extends ApiController
         $history = $this->history->getHistory();
 
         // Return history operations from the {offset}th, starting from {since}.
-        $since = \DateTime::createFromFormat(\DateTime::ATOM, $request->getParam('since'));
+        $since = \DateTime::createFromFormat(\DateTime::ATOM, $request->getParam('since', ''));
         $offset = $request->getParam('offset');
         if (empty($offset)) {
             $offset = 0;

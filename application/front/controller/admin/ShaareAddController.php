@@ -6,7 +6,7 @@ namespace Shaarli\Front\Controller\Admin;
 
 use Shaarli\Formatter\BookmarkMarkdownFormatter;
 use Shaarli\Render\TemplatePage;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class ShaareAddController extends ShaarliAdminController

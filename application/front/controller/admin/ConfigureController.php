@@ -8,7 +8,7 @@ use Shaarli\Languages;
 use Shaarli\Render\TemplatePage;
 use Shaarli\Render\ThemeUtils;
 use Shaarli\Thumbnailer;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 use Throwable;
 

@@ -10,7 +10,7 @@ use Shaarli\Front\Exception\WrongTokenException;
 use Shaarli\Render\TemplatePage;
 use Shaarli\Security\CookieManager;
 use Shaarli\Security\SessionManager;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

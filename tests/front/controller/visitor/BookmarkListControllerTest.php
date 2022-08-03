@@ -11,7 +11,7 @@ use Shaarli\Config\ConfigManager;
 use Shaarli\Security\LoginManager;
 use Shaarli\TestCase;
 use Shaarli\Thumbnailer;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class BookmarkListControllerTest extends TestCase
@@ -36,7 +36,7 @@ class BookmarkListControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->bookmarkService
@@ -104,7 +104,7 @@ class BookmarkListControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->willReturnCallback(function (string $key) {
             if ('page' === $key) {
                 return '2';
@@ -174,7 +174,7 @@ class BookmarkListControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->willReturnCallback(function (string $key) {
             if ('searchtags' === $key) {
                 return 'abc@def';
@@ -241,7 +241,7 @@ class BookmarkListControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->bookmarkService
@@ -276,7 +276,7 @@ class BookmarkListControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->bookmarkService
@@ -308,7 +308,7 @@ class BookmarkListControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->willReturnCallback(function (string $key, $default = null) use ($privateKey) {
             return $key === 'key' ? $privateKey : $default;
         });
@@ -334,7 +334,7 @@ class BookmarkListControllerTest extends TestCase
      */
     public function testThumbnailUpdateFromLinkList(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->loginManager = $this->createMock(LoginManager::class);
@@ -390,7 +390,7 @@ class BookmarkListControllerTest extends TestCase
      */
     public function testThumbnailUpdateFromPermalink(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->loginManager = $this->createMock(LoginManager::class);
@@ -432,7 +432,7 @@ class BookmarkListControllerTest extends TestCase
      */
     public function testThumbnailUpdateFromPermalinkAsync(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->loginManager = $this->createMock(LoginManager::class);
@@ -476,7 +476,7 @@ class BookmarkListControllerTest extends TestCase
         $hash = 'abcdef';
         $this->container->environment['QUERY_STRING'] = $hash;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->index($request, $response);
@@ -490,7 +490,7 @@ class BookmarkListControllerTest extends TestCase
      */
     public function testLegacyControllerDoPage(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParam')->with('do')->willReturn('picwall');
         $response = new Response();
 
@@ -505,7 +505,7 @@ class BookmarkListControllerTest extends TestCase
      */
     public function testLegacyControllerUnknownDoPage(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParam')->with('do')->willReturn('nope');
         $response = new Response();
 
@@ -520,7 +520,7 @@ class BookmarkListControllerTest extends TestCase
      */
     public function testLegacyControllerGetParameter(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParams')->willReturn(['post' => $url = 'http://url.tld']);
         $response = new Response();
 

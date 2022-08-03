@@ -10,9 +10,9 @@ use Shaarli\Config\ConfigManager;
 use Shaarli\History;
 use Shaarli\Plugin\PluginManager;
 use Shaarli\Tests\Utils\ReferenceLinkDB;
-use Slim\Container;
+use Pimple\Container;
 use Slim\Http\Environment;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**
@@ -104,7 +104,7 @@ class GetLinksTest extends \Shaarli\TestCase
         $env = Environment::mock([
             'REQUEST_METHOD' => 'GET',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
@@ -157,7 +157,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'offset=3&limit=1'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -175,7 +175,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'limit=all'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -199,7 +199,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'offset=100'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -217,7 +217,7 @@ class GetLinksTest extends \Shaarli\TestCase
                 'QUERY_STRING' => 'visibility=all'
             ]
         );
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string)$response->getBody(), true);
@@ -236,7 +236,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'visibility=private'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -256,7 +256,7 @@ class GetLinksTest extends \Shaarli\TestCase
                 'QUERY_STRING' => 'visibility=public'
             ]
         );
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string)$response->getBody(), true);
@@ -277,7 +277,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchterm=Tropical'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -290,7 +290,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchterm=tag3'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -303,7 +303,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchterm=stallman'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -318,7 +318,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchterm=stallman+software'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -333,7 +333,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchterm=' . urlencode('@web')
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -350,7 +350,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchterm=nope'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -364,7 +364,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchtags=dev',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -379,7 +379,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchtags=stuff+-gnu',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -392,7 +392,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchtags=*Tuff',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -404,7 +404,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchtags=c*',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -416,7 +416,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchtags=w*b',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -428,7 +428,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchtags=*',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -441,7 +441,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchtags=*stuff*',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -453,7 +453,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchtags=*a*+-*e*',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -465,7 +465,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchtags=-*',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);
@@ -481,7 +481,7 @@ class GetLinksTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'searchterm=poke&searchtags=dev',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = $this->controller->getLinks($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
         $data = json_decode((string) $response->getBody(), true);

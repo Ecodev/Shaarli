@@ -6,7 +6,7 @@ namespace Shaarli\Legacy;
 
 use Shaarli\Front\Controller\Visitor\FrontControllerMockHelper;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class LegacyControllerTest extends TestCase
@@ -28,7 +28,7 @@ class LegacyControllerTest extends TestCase
      */
     public function testProcess(string $legacyRoute, array $queryParameters, string $slimRoute, bool $isLoggedIn): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParams')->willReturn($queryParameters);
         $request
             ->method('getParam')
@@ -47,7 +47,7 @@ class LegacyControllerTest extends TestCase
 
     public function testProcessNotFound(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->expectException(UnknowLegacyRouteException::class);

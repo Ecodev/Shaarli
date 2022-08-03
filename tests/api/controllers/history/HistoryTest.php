@@ -6,9 +6,9 @@ use Shaarli\Config\ConfigManager;
 use Shaarli\History;
 use Shaarli\TestCase;
 use Shaarli\Tests\Utils\ReferenceHistory;
-use Slim\Container;
+use Pimple\Container;
 use Slim\Http\Environment;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class HistoryTest extends TestCase
@@ -70,7 +70,7 @@ class HistoryTest extends TestCase
         $env = Environment::mock([
             'REQUEST_METHOD' => 'GET',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->getHistory($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
@@ -123,7 +123,7 @@ class HistoryTest extends TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'limit=1'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->getHistory($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
@@ -148,7 +148,7 @@ class HistoryTest extends TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'offset=4'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->getHistory($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
@@ -173,7 +173,7 @@ class HistoryTest extends TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'since=2017-03-03T00:00:00%2B00:00'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->getHistory($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());
@@ -198,7 +198,7 @@ class HistoryTest extends TestCase
             'REQUEST_METHOD' => 'GET',
             'QUERY_STRING' => 'since=2017-02-01T00:00:00%2B00:00&offset=1&limit=1'
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->getHistory($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());

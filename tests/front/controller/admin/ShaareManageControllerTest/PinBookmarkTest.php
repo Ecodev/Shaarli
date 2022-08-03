@@ -11,7 +11,7 @@ use Shaarli\Front\Controller\Admin\ShaareManageController;
 use Shaarli\Http\HttpAccess;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class PinBookmarkTest extends TestCase
@@ -38,7 +38,7 @@ class PinBookmarkTest extends TestCase
     {
         $id = 123;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $bookmark = (new Bookmark())
@@ -79,7 +79,7 @@ class PinBookmarkTest extends TestCase
     {
         $id = 'invalid';
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager
@@ -99,7 +99,7 @@ class PinBookmarkTest extends TestCase
      */
     public function testDisplayEditFormIdNotProvided(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager
@@ -121,7 +121,7 @@ class PinBookmarkTest extends TestCase
     {
         $id = 123;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->bookmarkService

@@ -11,7 +11,7 @@ use Shaarli\Render\TemplatePage;
 use Shaarli\Security\CookieManager;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class LoginControllerTest extends TestCase
@@ -36,7 +36,7 @@ class LoginControllerTest extends TestCase
      */
     public function testValidControllerInvoke(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -76,7 +76,7 @@ class LoginControllerTest extends TestCase
     {
         $this->container->environment = ['HTTP_REFERER' => '> referer'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -119,7 +119,7 @@ class LoginControllerTest extends TestCase
      */
     public function testLoginControllerWhileLoggedIn(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->loginManager->expects(static::once())->method('isLoggedIn')->willReturn(true);
@@ -136,7 +136,7 @@ class LoginControllerTest extends TestCase
      */
     public function testLoginControllerOpenShaarli(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $conf = $this->createMock(ConfigManager::class);
@@ -160,7 +160,7 @@ class LoginControllerTest extends TestCase
      */
     public function testLoginControllerWhileBanned(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->loginManager->method('isLoggedIn')->willReturn(false);
@@ -180,7 +180,7 @@ class LoginControllerTest extends TestCase
             'login' => 'bob',
             'password' => 'pass',
         ];
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -224,7 +224,7 @@ class LoginControllerTest extends TestCase
         $parameters = [
             'returnurl' => 'http://shaarli/subfolder/admin/shaare',
         ];
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -253,7 +253,7 @@ class LoginControllerTest extends TestCase
         $parameters = [
             'longlastingsession' => true,
         ];
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -303,7 +303,7 @@ class LoginControllerTest extends TestCase
         $parameters = [
             'returnurl' => 'http://shaarli/subfolder/admin/shaare',
         ];
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -334,7 +334,7 @@ class LoginControllerTest extends TestCase
      */
     public function testProcessLoginWrongToken(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager = $this->createMock(SessionManager::class);
@@ -350,7 +350,7 @@ class LoginControllerTest extends TestCase
      */
     public function testProcessLoginAlreadyLoggedIn(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->loginManager->method('isLoggedIn')->willReturn(true);
@@ -368,7 +368,7 @@ class LoginControllerTest extends TestCase
      */
     public function testProcessLoginInOpenShaarli(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->conf = $this->createMock(ConfigManager::class);
@@ -390,7 +390,7 @@ class LoginControllerTest extends TestCase
      */
     public function testProcessLoginWhileBanned(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->loginManager->method('canLogin')->willReturn(false);

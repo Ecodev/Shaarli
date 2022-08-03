@@ -7,14 +7,6 @@ use Shaarli\Tests\Utils\ReferenceSessionIdHashes;
 $conf = new \Shaarli\Config\ConfigManager('tests/utils/config/configJson');
 new \Shaarli\Languages('en', $conf);
 
-// is_iterable is only compatible with PHP 7.1+
-if (!function_exists('is_iterable')) {
-    function is_iterable($var)
-    {
-        return is_array($var) || $var instanceof \Traversable;
-    }
-}
-
 // raw functions
 require_once 'application/config/ConfigPlugin.php';
 require_once 'application/bookmark/LinkUtils.php';

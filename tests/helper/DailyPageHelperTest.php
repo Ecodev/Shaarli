@@ -9,7 +9,7 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use Shaarli\Bookmark\Bookmark;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 
 class DailyPageHelperTest extends TestCase
 {
@@ -18,7 +18,7 @@ class DailyPageHelperTest extends TestCase
      */
     public function testExtractRequestedType(array $queryParams, string $expectedType): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParam')->willReturnCallback(function ($key) use ($queryParams): ?string {
             return $queryParams[$key] ?? null;
         });

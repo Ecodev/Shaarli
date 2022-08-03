@@ -6,7 +6,7 @@ namespace Shaarli\Front\Controller\Visitor;
 
 use Shaarli\Front\Exception\ShaarliFrontException;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class ErrorControllerTest extends TestCase
@@ -28,7 +28,7 @@ class ErrorControllerTest extends TestCase
      */
     public function testDisplayFrontExceptionError(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $message = 'error message';
@@ -56,7 +56,7 @@ class ErrorControllerTest extends TestCase
      */
     public function testDisplayAnyExceptionErrorNoDebugLoggedIn(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         // Save RainTPL assigned variables
@@ -79,7 +79,7 @@ class ErrorControllerTest extends TestCase
      */
     public function testDisplayAnyExceptionErrorNoDebug(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         // Save RainTPL assigned variables

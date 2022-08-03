@@ -9,7 +9,7 @@ use Shaarli\Bookmark\Exception\BookmarkNotFoundException;
 use Shaarli\Bookmark\SearchResult;
 use Shaarli\TestCase;
 use Shaarli\Thumbnailer;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class ThumbnailsControllerTest extends TestCase
@@ -35,7 +35,7 @@ class ThumbnailsControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->bookmarkService
@@ -63,7 +63,7 @@ class ThumbnailsControllerTest extends TestCase
      */
     public function testAjaxUpdateValid(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $bookmark = (new Bookmark())
@@ -113,7 +113,7 @@ class ThumbnailsControllerTest extends TestCase
      */
     public function testAjaxUpdateInvalidId(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->ajaxUpdate($request, $response, ['id' => 'nope']);
@@ -126,7 +126,7 @@ class ThumbnailsControllerTest extends TestCase
      */
     public function testAjaxUpdateNoId(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->ajaxUpdate($request, $response, []);
@@ -140,7 +140,7 @@ class ThumbnailsControllerTest extends TestCase
     public function testAjaxUpdateBookmarkNotFound(): void
     {
         $id = 123;
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->bookmarkService

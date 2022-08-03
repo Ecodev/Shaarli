@@ -11,7 +11,7 @@ use Shaarli\Config\ConfigManager;
 use Shaarli\Front\Exception\WrongTokenException;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class ManageTagControllerTest extends TestCase
@@ -36,7 +36,7 @@ class ManageTagControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->with('fromtag')->willReturn('fromtag');
         $response = new Response();
 
@@ -63,7 +63,7 @@ class ManageTagControllerTest extends TestCase
             return $key === 'general.tags_separator' ? ' ' : $key;
         });
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->controller->index($request, $response);
@@ -85,7 +85,7 @@ class ManageTagControllerTest extends TestCase
             'fromtag' => 'old-tag',
             'totag' => 'new-tag',
         ];
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -138,7 +138,7 @@ class ManageTagControllerTest extends TestCase
             'deletetag' => 'delete',
             'fromtag' => 'old-tag',
         ];
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -190,7 +190,7 @@ class ManageTagControllerTest extends TestCase
         $this->container->conf->expects(static::never())->method('set');
         $this->container->conf->expects(static::never())->method('write');
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->expectException(WrongTokenException::class);
@@ -209,7 +209,7 @@ class ManageTagControllerTest extends TestCase
         $requestParameters = [
             'renametag' => 'rename',
         ];
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -241,7 +241,7 @@ class ManageTagControllerTest extends TestCase
         $requestParameters = [
             'deletetag' => 'delete',
         ];
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -274,7 +274,7 @@ class ManageTagControllerTest extends TestCase
             'renametag' => 'rename',
             'fromtag' => 'old-tag'
         ];
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -305,7 +305,7 @@ class ManageTagControllerTest extends TestCase
         $session = [];
         $this->assignSessionVars($session);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -345,7 +345,7 @@ class ManageTagControllerTest extends TestCase
         $session = [];
         $this->assignSessionVars($session);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')
@@ -381,7 +381,7 @@ class ManageTagControllerTest extends TestCase
         $session = [];
         $this->assignSessionVars($session);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')

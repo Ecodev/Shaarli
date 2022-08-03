@@ -9,7 +9,7 @@ use Shaarli\Front\Controller\Admin\ShaarePublishController;
 use Shaarli\Http\HttpAccess;
 use Shaarli\Http\MetadataRetriever;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class DisplayCreateBatchFormTest extends TestCase
@@ -40,7 +40,7 @@ class DisplayCreateBatchFormTest extends TestCase
             'https://domain3.tld/url3',
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->willReturnCallback(function (string $key) use ($urls): ?string {
             return $key === 'urls' ? implode(PHP_EOL, $urls) : null;
         });

@@ -11,9 +11,9 @@ use Shaarli\History;
 use Shaarli\Plugin\PluginManager;
 use Shaarli\Tests\Utils\ReferenceHistory;
 use Shaarli\Tests\Utils\ReferenceLinkDB;
-use Slim\Container;
+use Pimple\Container;
 use Slim\Http\Environment;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class PutTagTest extends \Shaarli\TestCase
@@ -115,7 +115,7 @@ class PutTagTest extends \Shaarli\TestCase
         ]);
         $tagName = 'gnu';
         $update = ['name' => $newName = 'newtag'];
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $request = $request->withParsedBody($update);
 
         $response = $this->controller->putTag($request, new Response(), ['tagName' => $tagName]);
@@ -157,7 +157,7 @@ class PutTagTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'PUT',
         ]);
         $update = ['name' => $newName];
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $request = $request->withParsedBody($update);
 
         $response = $this->controller->putTag($request, new Response(), ['tagName' => $tagName]);
@@ -189,13 +189,13 @@ class PutTagTest extends \Shaarli\TestCase
         $env = Environment::mock([
             'REQUEST_METHOD' => 'PUT',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $env = Environment::mock([
             'REQUEST_METHOD' => 'PUT',
         ]);
         $update = ['name' => $newName];
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $request = $request->withParsedBody($update);
 
         try {
@@ -218,7 +218,7 @@ class PutTagTest extends \Shaarli\TestCase
         $env = Environment::mock([
             'REQUEST_METHOD' => 'PUT',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $this->controller->putTag($request, new Response(), ['tagName' => 'nopenope']);
     }

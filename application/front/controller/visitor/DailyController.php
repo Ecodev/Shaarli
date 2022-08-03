@@ -8,7 +8,7 @@ use DateTime;
 use Shaarli\Bookmark\Bookmark;
 use Shaarli\Helper\DailyPageHelper;
 use Shaarli\Render\TemplatePage;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

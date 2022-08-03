@@ -5,7 +5,7 @@ namespace Shaarli\Api\Controllers;
 use Shaarli\Bookmark\BookmarkServiceInterface;
 use Shaarli\Config\ConfigManager;
 use Shaarli\History;
-use Slim\Container;
+use Pimple\Container;
 
 /**
  * Abstract Class ApiController
@@ -51,9 +51,9 @@ abstract class ApiController
     public function __construct(Container $ci)
     {
         $this->ci = $ci;
-        $this->conf = $ci->get('conf');
-        $this->bookmarkService = $ci->get('db');
-        $this->history = $ci->get('history');
+        $this->conf = $ci['conf'];
+        $this->bookmarkService = $ci['db'];
+        $this->history = $ci['history'];
         if ($this->conf->get('dev.debug', false)) {
             $this->jsonStyle = JSON_PRETTY_PRINT;
         } else {

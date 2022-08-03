@@ -11,7 +11,7 @@ use Shaarli\Front\Controller\Admin\ShaarePublishController;
 use Shaarli\Http\HttpAccess;
 use Shaarli\Http\MetadataRetriever;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class DisplayCreateFormTest extends TestCase
@@ -49,7 +49,7 @@ class DisplayCreateFormTest extends TestCase
         $remoteDesc = 'Sometimes the meta description is relevant.';
         $remoteTags = 'abc def';
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->willReturnCallback(function (string $key) use ($url): ?string {
             return $key === 'post' ? $url : null;
         });
@@ -128,7 +128,7 @@ class DisplayCreateFormTest extends TestCase
         $url = 'http://url.tld/other?part=3&utm_ad=pay#hash';
         $expectedUrl = str_replace('&utm_ad=pay', '', $url);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->willReturnCallback(function (string $key) use ($url): ?string {
             return $key === 'post' ? $url : null;
         });
@@ -198,7 +198,7 @@ class DisplayCreateFormTest extends TestCase
         ];
         $expectedUrl = str_replace('&utm_ad=pay', '', $parameters['post']);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -231,7 +231,7 @@ class DisplayCreateFormTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->httpAccess->expects(static::never())->method('getHttpResponse');
@@ -259,7 +259,7 @@ class DisplayCreateFormTest extends TestCase
         $this->assignTemplateVars($assignedVariables);
 
         $url = 'magnet://kubuntu.torrent';
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($url): ?string {
@@ -299,7 +299,7 @@ class DisplayCreateFormTest extends TestCase
             })
         ;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->displayCreateForm($request, $response);
@@ -321,7 +321,7 @@ class DisplayCreateFormTest extends TestCase
         $url = 'http://url.tld/other?part=3&utm_ad=pay#hash';
         $expectedUrl = str_replace('&utm_ad=pay', '', $url);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($url): ?string {

@@ -10,7 +10,7 @@ use Shaarli\Formatter\BookmarkRawFormatter;
 use Shaarli\Netscape\NetscapeBookmarkUtils;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class ExportControllerTest extends TestCase
@@ -35,7 +35,7 @@ class ExportControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->index($request, $response);
@@ -59,7 +59,7 @@ class ExportControllerTest extends TestCase
             'prepend_note_url' => 'on',
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->willReturnCallback(function (string $key) use ($parameters) {
             return $parameters[$key] ?? null;
         });
@@ -115,7 +115,7 @@ class ExportControllerTest extends TestCase
      */
     public function testExportSelectionMissing(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager
@@ -139,7 +139,7 @@ class ExportControllerTest extends TestCase
             'selection' => 'all',
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->willReturnCallback(function (string $key) use ($parameters) {
             return $parameters[$key] ?? null;
         });

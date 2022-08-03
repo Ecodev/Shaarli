@@ -6,7 +6,7 @@ namespace Shaarli\Front\Controller\Visitor;
 
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class PublicSessionFilterControllerTest extends TestCase
@@ -30,7 +30,7 @@ class PublicSessionFilterControllerTest extends TestCase
     {
         $this->container->environment['HTTP_REFERER'] = 'http://shaarli/subfolder/controller/?searchtag=abc';
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->with('nb')->willReturn('8');
         $response = new Response();
 
@@ -52,7 +52,7 @@ class PublicSessionFilterControllerTest extends TestCase
      */
     public function testLinksPerPageNotValid(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->with('nb')->willReturn('test');
         $response = new Response();
 
@@ -76,7 +76,7 @@ class PublicSessionFilterControllerTest extends TestCase
     {
         $this->container->environment['HTTP_REFERER'] = 'http://shaarli/subfolder/controller/?searchtag=abc';
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager
@@ -99,7 +99,7 @@ class PublicSessionFilterControllerTest extends TestCase
     {
         $this->container->environment['HTTP_REFERER'] = 'http://shaarli/subfolder/controller/?searchtag=abc';
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager

@@ -9,9 +9,9 @@ use Shaarli\Config\ConfigManager;
 use Shaarli\History;
 use Shaarli\Plugin\PluginManager;
 use Shaarli\Tests\Utils\ReferenceLinkDB;
-use Slim\Container;
+use Pimple\Container;
 use Slim\Http\Environment;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**
@@ -104,7 +104,7 @@ class GetLinkIdTest extends \Shaarli\TestCase
         $env = Environment::mock([
             'REQUEST_METHOD' => 'GET',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->getLink($request, new Response(), ['id' => $id]);
         $this->assertEquals(200, $response->getStatusCode());
@@ -140,7 +140,7 @@ class GetLinkIdTest extends \Shaarli\TestCase
         $env = Environment::mock([
             'REQUEST_METHOD' => 'GET',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $this->controller->getLink($request, new Response(), ['id' => -1]);
     }

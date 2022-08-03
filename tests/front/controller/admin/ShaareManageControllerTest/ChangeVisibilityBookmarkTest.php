@@ -14,7 +14,7 @@ use Shaarli\Front\Controller\Admin\ShaareManageController;
 use Shaarli\Http\HttpAccess;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class ChangeVisibilityBookmarkTest extends TestCase
@@ -39,7 +39,7 @@ class ChangeVisibilityBookmarkTest extends TestCase
     {
         $parameters = ['id' => '123', 'newVisibility' => 'private'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -87,7 +87,7 @@ class ChangeVisibilityBookmarkTest extends TestCase
     {
         $parameters = ['id' => '123', 'newVisibility' => 'public'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -133,7 +133,7 @@ class ChangeVisibilityBookmarkTest extends TestCase
     {
         $parameters = ['id' => '123', 'newVisibility' => 'private'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -179,7 +179,7 @@ class ChangeVisibilityBookmarkTest extends TestCase
     {
         $parameters = ['id' => '123 456 789', 'newVisibility' => 'private'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -240,7 +240,7 @@ class ChangeVisibilityBookmarkTest extends TestCase
     {
         $parameters = ['id' => '123', 'newVisibility' => 'private'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -284,7 +284,7 @@ class ChangeVisibilityBookmarkTest extends TestCase
     {
         $parameters = ['id' => '123 456 789', 'newVisibility' => 'public'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -347,7 +347,7 @@ class ChangeVisibilityBookmarkTest extends TestCase
     {
         $parameters = ['id' => 'nope not an ID', 'newVisibility' => 'private'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {
@@ -373,7 +373,7 @@ class ChangeVisibilityBookmarkTest extends TestCase
      */
     public function testChangeVisibilityEmptyId(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager
@@ -395,7 +395,7 @@ class ChangeVisibilityBookmarkTest extends TestCase
     {
         $parameters = ['id' => '123', 'newVisibility' => 'invalid'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getParam')
             ->willReturnCallback(function (string $key) use ($parameters): ?string {

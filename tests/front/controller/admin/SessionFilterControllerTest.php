@@ -7,7 +7,7 @@ namespace Shaarli\Front\Controller\Admin;
 use Shaarli\Security\LoginManager;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class SessionFilterControllerTest extends TestCase
@@ -40,7 +40,7 @@ class SessionFilterControllerTest extends TestCase
             ->with(SessionManager::KEY_VISIBILITY, 'private')
         ;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->visibility($request, $response, $arg);
@@ -75,7 +75,7 @@ class SessionFilterControllerTest extends TestCase
             ->with(SessionManager::KEY_VISIBILITY)
         ;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->visibility($request, $response, $arg);
@@ -104,7 +104,7 @@ class SessionFilterControllerTest extends TestCase
             ->with(SessionManager::KEY_VISIBILITY, 'private')
         ;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->visibility($request, $response, $arg);
@@ -134,7 +134,7 @@ class SessionFilterControllerTest extends TestCase
             ->with(SessionManager::KEY_VISIBILITY)
         ;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->visibility($request, $response, $arg);
@@ -165,7 +165,7 @@ class SessionFilterControllerTest extends TestCase
             ->with(SessionManager::KEY_VISIBILITY)
         ;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->visibility($request, $response, $arg);

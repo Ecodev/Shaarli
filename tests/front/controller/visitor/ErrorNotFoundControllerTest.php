@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Shaarli\Front\Controller\Visitor;
 
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 use Slim\Http\Uri;
 
@@ -28,7 +28,7 @@ class ErrorNotFoundControllerTest extends TestCase
      */
     public function testDisplayNotFoundError(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->expects(static::once())->method('getRequestTarget')->willReturn('/');
         $request->method('getUri')->willReturnCallback(function (): Uri {
             $uri = $this->createMock(Uri::class);
@@ -58,7 +58,7 @@ class ErrorNotFoundControllerTest extends TestCase
      */
     public function testDisplayNotFoundErrorFromAPI(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->expects(static::once())->method('getRequestTarget')->willReturn('/sufolder/api/v1/links');
         $request->method('getUri')->willReturnCallback(function (): Uri {
             $uri = $this->createMock(Uri::class);

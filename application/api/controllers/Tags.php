@@ -6,7 +6,7 @@ use Shaarli\Api\ApiUtils;
 use Shaarli\Api\Exceptions\ApiBadParametersException;
 use Shaarli\Api\Exceptions\ApiTagNotFoundException;
 use Shaarli\Bookmark\BookmarkFilter;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

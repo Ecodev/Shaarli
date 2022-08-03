@@ -9,7 +9,7 @@ use Shaarli\Front\Exception\WrongTokenException;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
 use Shaarli\Thumbnailer;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class ConfigureControllerTest extends TestCase
@@ -34,7 +34,7 @@ class ConfigureControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->conf = $this->createMock(ConfigManager::class);
@@ -113,7 +113,7 @@ class ConfigureControllerTest extends TestCase
             'thumbnails.mode' => $parameters['enableThumbnails'],
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')->willReturnCallback(function (string $key) use ($parameters) {
@@ -159,7 +159,7 @@ class ConfigureControllerTest extends TestCase
         $this->container->conf->expects(static::never())->method('set');
         $this->container->conf->expects(static::never())->method('write');
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->expectException(WrongTokenException::class);
@@ -175,7 +175,7 @@ class ConfigureControllerTest extends TestCase
         $session = [];
         $this->assignSessionVars($session);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')->willReturnCallback(function (string $key) {
@@ -211,7 +211,7 @@ class ConfigureControllerTest extends TestCase
         $session = [];
         $this->assignSessionVars($session);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParam')->willReturnCallback(function (string $key) {

@@ -3,7 +3,7 @@
 namespace Shaarli\Api\Controllers;
 
 use Shaarli\Bookmark\BookmarkFilter;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

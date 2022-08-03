@@ -7,7 +7,7 @@ namespace Shaarli\Front\Controller\Admin;
 use Shaarli\Security\CookieManager;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class LogoutControllerTest extends TestCase
@@ -26,7 +26,7 @@ class LogoutControllerTest extends TestCase
 
     public function testValidControllerInvoke(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->pageCacheManager->expects(static::once())->method('invalidateCaches');

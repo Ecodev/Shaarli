@@ -13,7 +13,7 @@ use Shaarli\Render\PageCacheManager;
 use Shaarli\Security\LoginManager;
 use Shaarli\TestCase;
 use Shaarli\Updater\Updater;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 use Slim\Http\Uri;
 
@@ -53,7 +53,7 @@ class ShaarliMiddlewareTest extends TestCase
      */
     public function testMiddlewareExecution(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getUri')->willReturnCallback(function (): Uri {
             $uri = $this->createMock(Uri::class);
             $uri->method('getBasePath')->willReturn('/subfolder');
@@ -62,7 +62,7 @@ class ShaarliMiddlewareTest extends TestCase
         });
 
         $response = new Response();
-        $controller = function (Request $request, Response $response): Response {
+        $controller = function (ServerRequestInterface $request, Response $response): Response {
             return $response->withStatus(418); // I'm a tea pot
         };
 
@@ -79,7 +79,7 @@ class ShaarliMiddlewareTest extends TestCase
      */
     public function testMiddlewareExecutionWithFrontException(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getUri')->willReturnCallback(function (): Uri {
             $uri = $this->createMock(Uri::class);
             $uri->method('getBasePath')->willReturn('/subfolder');
@@ -111,7 +111,7 @@ class ShaarliMiddlewareTest extends TestCase
      */
     public function testMiddlewareExecutionWithUnauthorizedException(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getUri')->willReturnCallback(function (): Uri {
             $uri = $this->createMock(Uri::class);
             $uri->method('getBasePath')->willReturn('/subfolder');
@@ -140,7 +140,7 @@ class ShaarliMiddlewareTest extends TestCase
      */
     public function testMiddlewareExecutionWithServerException(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getUri')->willReturnCallback(function (): Uri {
             $uri = $this->createMock(Uri::class);
             $uri->method('getBasePath')->willReturn('/subfolder');
@@ -175,7 +175,7 @@ class ShaarliMiddlewareTest extends TestCase
 
     public function testMiddlewareExecutionWithUpdates(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getUri')->willReturnCallback(function (): Uri {
             $uri = $this->createMock(Uri::class);
             $uri->method('getBasePath')->willReturn('/subfolder');
@@ -184,7 +184,7 @@ class ShaarliMiddlewareTest extends TestCase
         });
 
         $response = new Response();
-        $controller = function (Request $request, Response $response): Response {
+        $controller = function (ServerRequestInterface $request, Response $response): Response {
             return $response->withStatus(418); // I'm a tea pot
         };
 

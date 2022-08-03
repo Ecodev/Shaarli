@@ -6,7 +6,7 @@ namespace Shaarli\Front\Controller\Visitor;
 
 use Shaarli\Bookmark\BookmarkFilter;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class TagCloudControllerTest extends TestCase
@@ -35,7 +35,7 @@ class TagCloudControllerTest extends TestCase
         ];
         $expectedOrder = ['abc', 'def', 'ghi'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         // Save RainTPL assigned variables
@@ -94,7 +94,7 @@ class TagCloudControllerTest extends TestCase
      */
     public function testValidCloudControllerInvokeWithParameters(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getQueryParam')
             ->with()
@@ -161,7 +161,7 @@ class TagCloudControllerTest extends TestCase
      */
     public function testEmptyCloud(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         // Save RainTPL assigned variables
@@ -215,7 +215,7 @@ class TagCloudControllerTest extends TestCase
             'ghi' => 1,
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         // Save RainTPL assigned variables
@@ -271,7 +271,7 @@ class TagCloudControllerTest extends TestCase
      */
     public function testValidListControllerInvokeWithParameters(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->method('getQueryParam')
             ->with()
@@ -336,7 +336,7 @@ class TagCloudControllerTest extends TestCase
      */
     public function testEmptyList(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         // Save RainTPL assigned variables

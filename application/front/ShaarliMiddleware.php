@@ -4,7 +4,7 @@ namespace Shaarli\Front;
 
 use Shaarli\Container\ShaarliContainer;
 use Shaarli\Front\Exception\UnauthorizedException;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

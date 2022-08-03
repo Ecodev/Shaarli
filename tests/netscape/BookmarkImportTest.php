@@ -12,7 +12,7 @@ use Shaarli\Config\ConfigManager;
 use Shaarli\History;
 use Shaarli\Plugin\PluginManager;
 use Shaarli\TestCase;
-use Slim\Http\UploadedFile;
+use Laminas\Diactoros\UploadedFile;
 
 /**
  * Utility function to load a file's metadata in a $_FILES-like array
@@ -25,9 +25,10 @@ function file2array($filename)
 {
     return new UploadedFile(
         __DIR__ . '/input/' . $filename,
+        filesize(__DIR__ . '/input/' . $filename),
+        UPLOAD_ERR_OK,
         $filename,
-        null,
-        filesize(__DIR__ . '/input/' . $filename)
+        'type'
     );
 }
 

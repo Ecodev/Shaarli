@@ -7,7 +7,7 @@ namespace Shaarli\Front\Controller\Admin;
 use DateTime;
 use Shaarli\Bookmark\Bookmark;
 use Shaarli\Render\TemplatePage;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

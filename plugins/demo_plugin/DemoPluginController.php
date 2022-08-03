@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Shaarli\DemoPlugin;
 
 use Shaarli\Front\Controller\Admin\ShaarliAdminController;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class DemoPluginController extends ShaarliAdminController

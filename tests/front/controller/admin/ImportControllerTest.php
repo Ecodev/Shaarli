@@ -8,9 +8,9 @@ use Psr\Http\Message\UploadedFileInterface;
 use Shaarli\Netscape\NetscapeBookmarkUtils;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
-use Slim\Http\UploadedFile;
+use Laminas\Diactoros\UploadedFile;
 
 class ImportControllerTest extends TestCase
 {
@@ -34,7 +34,7 @@ class ImportControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->index($request, $response);
@@ -57,9 +57,9 @@ class ImportControllerTest extends TestCase
             'other' => 'param',
         ];
 
-        $requestFile = new UploadedFile('file', 'name', 'type', 123);
+        $requestFile = new UploadedFile('file', 123, UPLOAD_ERR_OK, 'name', 'type');
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParams')->willReturnCallback(function () use ($parameters) {
             return $parameters;
         });
@@ -103,7 +103,7 @@ class ImportControllerTest extends TestCase
      */
     public function testImportFileMissing(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager
@@ -123,9 +123,9 @@ class ImportControllerTest extends TestCase
      */
     public function testImportEmptyFile(): void
     {
-        $requestFile = new UploadedFile('file', 'name', 'type', 0);
+        $requestFile = new UploadedFile('file', 0, UPLOAD_ERR_OK, 'name', 'type');;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getUploadedFiles')->willReturn(['filetoupload' => $requestFile]);
         $response = new Response();
 

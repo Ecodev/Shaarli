@@ -9,9 +9,9 @@ use Shaarli\History;
 use Shaarli\Plugin\PluginManager;
 use Shaarli\Tests\Utils\ReferenceHistory;
 use Shaarli\Tests\Utils\ReferenceLinkDB;
-use Slim\Container;
+use Pimple\Container;
 use Slim\Http\Environment;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class DeleteLinkTest extends \Shaarli\TestCase
@@ -111,7 +111,7 @@ class DeleteLinkTest extends \Shaarli\TestCase
         $env = Environment::mock([
             'REQUEST_METHOD' => 'DELETE',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->deleteLink($request, new Response(), ['id' => $id]);
         $this->assertEquals(204, $response->getStatusCode());
@@ -146,7 +146,7 @@ class DeleteLinkTest extends \Shaarli\TestCase
         $env = Environment::mock([
             'REQUEST_METHOD' => 'DELETE',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $this->controller->deleteLink($request, new Response(), ['id' => $id]);
     }

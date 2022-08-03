@@ -6,7 +6,7 @@ namespace Shaarli\Legacy;
 
 use Shaarli\Feed\FeedBuilder;
 use Shaarli\Front\Controller\Visitor\ShaarliVisitorController;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Shaarli\Front\Controller\Admin;
 
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class ToolsControllerTest extends TestCase
@@ -24,7 +24,7 @@ class ToolsControllerTest extends TestCase
 
     public function testDefaultInvokeWithHttps(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->environment = [
@@ -47,7 +47,7 @@ class ToolsControllerTest extends TestCase
 
     public function testDefaultInvokeWithoutHttps(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->environment = [

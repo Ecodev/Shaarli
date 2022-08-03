@@ -8,7 +8,7 @@ use Shaarli\Config\ConfigManager;
 use Shaarli\Front\Exception\AlreadyInstalledException;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class InstallControllerTest extends TestCase
@@ -52,7 +52,7 @@ class InstallControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager = $this->createMock(SessionManager::class);
@@ -107,7 +107,7 @@ class InstallControllerTest extends TestCase
      */
     public function testInstallRedirectToSessionTest(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager = $this->createMock(SessionManager::class);
@@ -128,7 +128,7 @@ class InstallControllerTest extends TestCase
      */
     public function testInstallSessionTestValid(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager = $this->createMock(SessionManager::class);
@@ -152,7 +152,7 @@ class InstallControllerTest extends TestCase
         $assignedVars = [];
         $this->assignTemplateVars($assignedVars);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager = $this->createMock(SessionManager::class);
@@ -201,7 +201,7 @@ class InstallControllerTest extends TestCase
             'general.header_link' => '/subfolder',
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getParam')->willReturnCallback(function (string $key) use ($providedParameters) {
             return $providedParameters[$key] ?? null;
         });
@@ -253,7 +253,7 @@ class InstallControllerTest extends TestCase
     {
         $confSettings = [];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->conf->method('set')->willReturnCallback(function (string $key, $value) use (&$confSettings) {
@@ -286,7 +286,7 @@ class InstallControllerTest extends TestCase
 
         $this->container->basePath = '';
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->conf->method('set')->willReturnCallback(function (string $key, $value) use (&$confSettings) {

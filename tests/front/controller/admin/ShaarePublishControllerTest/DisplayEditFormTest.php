@@ -11,7 +11,7 @@ use Shaarli\Front\Controller\Admin\ShaarePublishController;
 use Shaarli\Http\HttpAccess;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class DisplayEditFormTest extends TestCase
@@ -40,7 +40,7 @@ class DisplayEditFormTest extends TestCase
 
         $id = 11;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->httpAccess->expects(static::never())->method('getHttpResponse');
@@ -87,7 +87,7 @@ class DisplayEditFormTest extends TestCase
     {
         $id = 'invalid';
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager
@@ -108,7 +108,7 @@ class DisplayEditFormTest extends TestCase
      */
     public function testDisplayEditFormIdNotProvided(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager
@@ -131,7 +131,7 @@ class DisplayEditFormTest extends TestCase
     {
         $id = 123;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->bookmarkService

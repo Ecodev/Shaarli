@@ -10,7 +10,7 @@ use Shaarli\Legacy\LegacyController;
 use Shaarli\Legacy\UnknowLegacyRouteException;
 use Shaarli\Render\TemplatePage;
 use Shaarli\Thumbnailer;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**
@@ -24,7 +24,7 @@ class BookmarkListController extends ShaarliVisitorController
     /**
      * GET / - Displays the bookmark list, with optional filter parameters.
      */
-    public function index(Request $request, Response $response): Response
+    public function index(ServerRequest $request, Response $response): Response
     {
         $legacyResponse = $this->processLegacyController($request, $response);
         if (null !== $legacyResponse) {
@@ -123,7 +123,7 @@ class BookmarkListController extends ShaarliVisitorController
     /**
      * GET /shaare/{hash} - Display a single shaare
      */
-    public function permalink(Request $request, Response $response, array $args): Response
+    public function permalink(ServerRequest $request, Response $response, array $args): Response
     {
         $privateKey = $request->getParam('key');
 
@@ -203,7 +203,7 @@ class BookmarkListController extends ShaarliVisitorController
      * Process legacy routes if necessary. They used query parameters.
      * If no legacy routes is passed, return null.
      */
-    protected function processLegacyController(Request $request, Response $response): ?Response
+    protected function processLegacyController(ServerRequest $request, Response $response): ?Response
     {
         // Legacy smallhash filter
         $queryString = $this->container->environment['QUERY_STRING'] ?? null;

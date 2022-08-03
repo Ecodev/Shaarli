@@ -8,7 +8,7 @@ use Shaarli\Container\ShaarliContainer;
 use Shaarli\Front\Exception\OpenShaarliPasswordException;
 use Shaarli\Front\Exception\ShaarliFrontException;
 use Shaarli\Render\TemplatePage;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 use Throwable;
 

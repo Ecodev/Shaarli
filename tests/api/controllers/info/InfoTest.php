@@ -9,9 +9,9 @@ use Shaarli\History;
 use Shaarli\Plugin\PluginManager;
 use Shaarli\TestCase;
 use Shaarli\Tests\Utils\ReferenceLinkDB;
-use Slim\Container;
+use Pimple\Container;
 use Slim\Http\Environment;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**
@@ -91,7 +91,7 @@ class InfoTest extends TestCase
         $env = Environment::mock([
             'REQUEST_METHOD' => 'GET',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->getInfo($request, new Response());
         $this->assertEquals(200, $response->getStatusCode());

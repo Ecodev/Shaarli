@@ -10,7 +10,7 @@ use Shaarli\Formatter\BookmarkFormatter;
 use Shaarli\Formatter\BookmarkMarkdownFormatter;
 use Shaarli\Render\TemplatePage;
 use Shaarli\Thumbnailer;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class ShaarePublishController extends ShaarliAdminController

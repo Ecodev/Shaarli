@@ -7,7 +7,7 @@ namespace Shaarli\Front\Controller\Admin;
 use Shaarli\Config\ConfigManager;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**
@@ -51,7 +51,7 @@ class ServerControllerTest extends TestCase
      */
     public function testIndex(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
        // Save RainTPL assigned variables
@@ -107,7 +107,7 @@ class ServerControllerTest extends TestCase
             ->with(SessionManager::KEY_SUCCESS_MESSAGES, ['Shaarli\'s cache folder has been cleared!'])
         ;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParam')->with('type')->willReturn('main');
         $response = new Response();
 
@@ -159,7 +159,7 @@ class ServerControllerTest extends TestCase
             });
         ;
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getQueryParam')->with('type')->willReturn('thumbnails');
         $response = new Response();
 

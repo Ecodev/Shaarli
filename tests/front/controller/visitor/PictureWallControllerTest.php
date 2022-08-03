@@ -10,7 +10,7 @@ use Shaarli\Config\ConfigManager;
 use Shaarli\Front\Exception\ThumbnailsDisabledException;
 use Shaarli\TestCase;
 use Shaarli\Thumbnailer;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class PictureWallControllerTest extends TestCase
@@ -29,7 +29,7 @@ class PictureWallControllerTest extends TestCase
 
     public function testValidControllerInvokeDefault(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->expects(static::once())->method('getQueryParams')->willReturn([]);
         $response = new Response();
 
@@ -107,7 +107,7 @@ class PictureWallControllerTest extends TestCase
     {
         $this->expectException(ThumbnailsDisabledException::class);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         // ConfigManager: thumbnails are disabled

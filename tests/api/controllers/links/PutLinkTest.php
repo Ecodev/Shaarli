@@ -10,9 +10,9 @@ use Shaarli\History;
 use Shaarli\Plugin\PluginManager;
 use Shaarli\Tests\Utils\ReferenceHistory;
 use Shaarli\Tests\Utils\ReferenceLinkDB;
-use Slim\Container;
+use Pimple\Container;
 use Slim\Http\Environment;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class PutLinkTest extends \Shaarli\TestCase
@@ -116,7 +116,7 @@ class PutLinkTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'PUT',
         ]);
         $id = '41';
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->putLink($request, new Response(), ['id' => $id]);
         $this->assertEquals(200, $response->getStatusCode());
@@ -162,7 +162,7 @@ class PutLinkTest extends \Shaarli\TestCase
             'tags' => ['corneille', 'rodrigue'],
             'private' => true,
         ];
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $request = $request->withParsedBody($update);
 
         $response = $this->controller->putLink($request, new Response(), ['id' => $id]);
@@ -202,7 +202,7 @@ class PutLinkTest extends \Shaarli\TestCase
             'CONTENT_TYPE' => 'application/json'
         ]);
 
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $request = $request->withParsedBody($link);
         $response = $this->controller->putLink($request, new Response(), ['id' => 41]);
 
@@ -237,7 +237,7 @@ class PutLinkTest extends \Shaarli\TestCase
         $env = Environment::mock([
             'REQUEST_METHOD' => 'PUT',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $this->controller->putLink($request, new Response(), ['id' => -1]);
     }
@@ -256,7 +256,7 @@ class PutLinkTest extends \Shaarli\TestCase
             'CONTENT_TYPE' => 'application/json'
         ]);
 
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $request = $request->withParsedBody($link);
         $response = $this->controller->putLink($request, new Response(), ['id' => $id]);
 
@@ -280,7 +280,7 @@ class PutLinkTest extends \Shaarli\TestCase
             'CONTENT_TYPE' => 'application/json'
         ]);
 
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $request = $request->withParsedBody($link);
         $response = $this->controller->putLink($request, new Response(), ['id' => $id]);
 

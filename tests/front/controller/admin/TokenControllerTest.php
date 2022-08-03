@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Shaarli\Front\Controller\Admin;
 
-use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;Shaarli\TestCase;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class TokenControllerTest extends TestCase
@@ -24,7 +24,7 @@ class TokenControllerTest extends TestCase
 
     public function testGetToken(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->sessionManager

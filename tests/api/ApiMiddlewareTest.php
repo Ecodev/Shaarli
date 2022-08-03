@@ -6,9 +6,9 @@ use Shaarli\Config\ConfigManager;
 use Shaarli\History;
 use Shaarli\Plugin\PluginManager;
 use Shaarli\Tests\Utils\ReferenceLinkDB;
-use Slim\Container;
+use Pimple\Container;
 use Slim\Http\Environment;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**
@@ -75,7 +75,7 @@ class ApiMiddlewareTest extends \Shaarli\TestCase
      */
     public function testInvokeMiddlewareWithValidToken(): void
     {
-        $next = function (Request $request, Response $response): Response {
+        $next = function (ServerRequestInterface $request, Response $response): Response {
             return $response;
         };
         $mw = new ApiMiddleware($this->container);
@@ -84,7 +84,7 @@ class ApiMiddlewareTest extends \Shaarli\TestCase
             'REQUEST_URI' => '/echo',
             'HTTP_AUTHORIZATION' => 'Bearer ' . ApiUtilsTest::generateValidJwtToken('NapoleonWasALizard'),
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = new Response();
         /** @var Response $response */
         $response = $mw($request, $response, $next);
@@ -98,7 +98,7 @@ class ApiMiddlewareTest extends \Shaarli\TestCase
      */
     public function testInvokeMiddlewareWithValidTokenFromRedirectedHeader(): void
     {
-        $next = function (Request $request, Response $response): Response {
+        $next = function (ServerRequestInterface $request, Response $response): Response {
             return $response;
         };
 
@@ -109,7 +109,7 @@ class ApiMiddlewareTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'REQUEST_URI' => '/echo',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = new Response();
         /** @var Response $response */
         $response = $mw($request, $response, $next);
@@ -129,7 +129,7 @@ class ApiMiddlewareTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'REQUEST_URI' => '/echo',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = new Response();
         /** @var Response $response */
         $response = $mw($request, $response, null);
@@ -152,7 +152,7 @@ class ApiMiddlewareTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'REQUEST_URI' => '/echo',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = new Response();
         /** @var Response $response */
         $response = $mw($request, $response, null);
@@ -175,7 +175,7 @@ class ApiMiddlewareTest extends \Shaarli\TestCase
             'REQUEST_METHOD' => 'GET',
             'REQUEST_URI' => '/echo',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = new Response();
         /** @var Response $response */
         $response = $mw($request, $response, null);
@@ -200,7 +200,7 @@ class ApiMiddlewareTest extends \Shaarli\TestCase
             'REQUEST_URI' => '/echo',
             'HTTP_AUTHORIZATION' => 'Bearer jwt',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = new Response();
         /** @var Response $response */
         $response = $mw($request, $response, null);
@@ -223,7 +223,7 @@ class ApiMiddlewareTest extends \Shaarli\TestCase
             'REQUEST_URI' => '/echo',
             'HTTP_AUTHORIZATION' => 'PolarBearer jwt',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = new Response();
         /** @var Response $response */
         $response = $mw($request, $response, null);
@@ -249,7 +249,7 @@ class ApiMiddlewareTest extends \Shaarli\TestCase
             'REQUEST_URI' => '/echo',
             'HTTP_AUTHORIZATION' => 'Bearer jwt',
         ]);
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $response = new Response();
         /** @var Response $response */
         $response = $mw($request, $response, null);

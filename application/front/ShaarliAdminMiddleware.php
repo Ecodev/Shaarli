@@ -2,7 +2,7 @@
 
 namespace Shaarli\Front;
 
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

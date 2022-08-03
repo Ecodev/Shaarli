@@ -9,7 +9,7 @@ use Shaarli\Container\ShaarliContainer;
 use Shaarli\Security\LoginManager;
 use Shaarli\TestCase;
 use Shaarli\Updater\Updater;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 use Slim\Http\Uri;
 
@@ -52,7 +52,7 @@ class ShaarliAdminMiddlewareTest extends TestCase
     {
         $this->container->loginManager->expects(static::once())->method('isLoggedIn')->willReturn(false);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getUri')->willReturnCallback(function (): Uri {
             $uri = $this->createMock(Uri::class);
             $uri->method('getBasePath')->willReturn('/subfolder');
@@ -80,7 +80,7 @@ class ShaarliAdminMiddlewareTest extends TestCase
     {
         $this->container->loginManager->method('isLoggedIn')->willReturn(true);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request->method('getUri')->willReturnCallback(function (): Uri {
             $uri = $this->createMock(Uri::class);
             $uri->method('getBasePath')->willReturn('/subfolder');
@@ -89,7 +89,7 @@ class ShaarliAdminMiddlewareTest extends TestCase
         });
 
         $response = new Response();
-        $controller = function (Request $request, Response $response): Response {
+        $controller = function (ServerRequestInterface $request, Response $response): Response {
             return $response->withStatus(418); // I'm a tea pot
         };
 

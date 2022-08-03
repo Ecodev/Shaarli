@@ -21,7 +21,7 @@ use Shaarli\Security\LoginManager;
 use Shaarli\Security\SessionManager;
 use Shaarli\Thumbnailer;
 use Shaarli\Updater\Updater;
-use Slim\Container;
+use Pimple\Container;
 
 /**
  * Extension of Slim container to document the injected objects.

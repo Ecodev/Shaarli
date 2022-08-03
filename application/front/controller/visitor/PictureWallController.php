@@ -7,7 +7,7 @@ namespace Shaarli\Front\Controller\Visitor;
 use Shaarli\Front\Exception\ThumbnailsDisabledException;
 use Shaarli\Render\TemplatePage;
 use Shaarli\Thumbnailer;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 /**

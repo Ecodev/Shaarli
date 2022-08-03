@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Shaarli\Front\Controller\Visitor;
 
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class TagControllerTest extends TestCase
@@ -25,7 +25,7 @@ class TagControllerTest extends TestCase
     {
         $this->container->environment = ['HTTP_REFERER' => 'http://shaarli/controller/'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $tags = ['newTag' => 'abc'];
@@ -41,7 +41,7 @@ class TagControllerTest extends TestCase
     {
         $this->container->environment = ['HTTP_REFERER' => 'http://shaarli/controller/?searchtags=def'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $tags = ['newTag' => 'abc'];
@@ -55,7 +55,7 @@ class TagControllerTest extends TestCase
 
     public function testAddTagWithoutRefererAndExistingSearch(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $tags = ['newTag' => 'abc'];
@@ -71,7 +71,7 @@ class TagControllerTest extends TestCase
     {
         $this->container->environment = ['HTTP_REFERER' => 'http://shaarli/controller/?searchtags=def&addtag=abc'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $tags = ['newTag' => 'abc'];
@@ -87,7 +87,7 @@ class TagControllerTest extends TestCase
     {
         $this->container->environment = ['HTTP_REFERER' => 'http://shaarli/controller/?searchtags=def&page=12'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $tags = ['newTag' => 'abc'];
@@ -103,7 +103,7 @@ class TagControllerTest extends TestCase
     {
         $this->container->environment = ['HTTP_REFERER' => 'http://shaarli/controller/?searchtags='];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $tags = ['newTag' => 'abc'];
@@ -119,7 +119,7 @@ class TagControllerTest extends TestCase
     {
         $this->container->environment = ['HTTP_REFERER' => 'http://shaarli/controller/?searchtags=def'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->addTag($request, $response, []);
@@ -131,7 +131,7 @@ class TagControllerTest extends TestCase
 
     public function testAddTagWithoutNewTagWithoutReferer(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->addTag($request, $response, []);
@@ -145,7 +145,7 @@ class TagControllerTest extends TestCase
     {
         $this->container->environment = ['HTTP_REFERER' => 'http://shaarli/controller/?searchtags=def'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $tags = ['tag' => 'abc'];
@@ -161,7 +161,7 @@ class TagControllerTest extends TestCase
     {
         $this->container->environment = ['HTTP_REFERER' => 'http://shaarli/controller/'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $tags = ['tag' => 'abc'];
@@ -175,7 +175,7 @@ class TagControllerTest extends TestCase
 
     public function testRemoveTagWithoutReferer(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $tags = ['tag' => 'abc'];
@@ -191,7 +191,7 @@ class TagControllerTest extends TestCase
     {
         $this->container->environment = ['HTTP_REFERER' => 'http://shaarli/controller/?searchtag=abc'];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->removeTag($request, $response, []);
@@ -203,7 +203,7 @@ class TagControllerTest extends TestCase
 
     public function testRemoveTagWithoutTagWithoutReferer(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $result = $this->controller->removeTag($request, $response, []);

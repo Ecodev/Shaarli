@@ -7,9 +7,9 @@ use Shaarli\Api\Exceptions\ApiAuthorizationException;
 use Shaarli\Api\Exceptions\ApiException;
 use Shaarli\Bookmark\BookmarkFileService;
 use Shaarli\Config\ConfigManager;
-use Slim\Container;
-use Slim\Http\Request;
+use Pimple\Container;
 use Slim\Http\Response;
+use Slim\Http\ServerRequest;
 
 /**
  * Class ApiMiddleware
@@ -46,7 +46,7 @@ class ApiMiddleware
     public function __construct($container)
     {
         $this->container = $container;
-        $this->conf = $this->container->get('conf');
+        $this->conf = $this->container['conf'];
         $this->setLinkDb($this->conf);
     }
 
@@ -56,7 +56,7 @@ class ApiMiddleware
      *   - execute the controller
      *   - return the response
      *
-     * @param  Request  $request  Slim request
+     * @param  ServerRequestInterface  $request  Slim request
      * @param  Response $response Slim response
      * @param  callable $next     Next action
      *
@@ -87,7 +87,7 @@ class ApiMiddleware
      * Check the request validity (HTTP method, request value, etc.),
      * that the API is enabled, and the JWT token validity.
      *
-     * @param  Request $request  Slim request
+     * @param  ServerRequestInterface $request  Slim request
      *
      * @throws ApiAuthorizationException The API is disabled or the token is invalid.
      */
@@ -103,7 +103,7 @@ class ApiMiddleware
      * Check that the JWT token is set and valid.
      * The API secret setting must be set.
      *
-     * @param  Request $request  Slim request
+     * @param  ServerRequestInterface $request  Slim request
      *
      * @throws ApiAuthorizationException The token couldn't be validated.
      */
@@ -145,8 +145,8 @@ class ApiMiddleware
     {
         $linkDb = new BookmarkFileService(
             $conf,
-            $this->container->get('pluginManager'),
-            $this->container->get('history'),
+            $this->container['pluginManager'],
+            $this->container['history'],
             new FlockMutex(fopen(SHAARLI_MUTEX_FILE, 'r'), 2),
             true
         );

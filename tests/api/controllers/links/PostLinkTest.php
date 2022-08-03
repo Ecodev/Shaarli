@@ -11,9 +11,9 @@ use Shaarli\Plugin\PluginManager;
 use Shaarli\TestCase;
 use Shaarli\Tests\Utils\ReferenceHistory;
 use Shaarli\Tests\Utils\ReferenceLinkDB;
-use Slim\Container;
+use Pimple\Container;
 use Slim\Http\Environment;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 use Slim\Router;
 
@@ -133,7 +133,7 @@ class PostLinkTest extends TestCase
             'REQUEST_METHOD' => 'POST',
         ]);
 
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
 
         $response = $this->controller->postLink($request, new Response());
         $this->assertEquals(201, $response->getStatusCode());
@@ -179,7 +179,7 @@ class PostLinkTest extends TestCase
             'CONTENT_TYPE' => 'application/json'
         ]);
 
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $request = $request->withParsedBody($link);
         $response = $this->controller->postLink($request, new Response());
 
@@ -215,7 +215,7 @@ class PostLinkTest extends TestCase
             'CONTENT_TYPE' => 'application/json'
         ]);
 
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $request = $request->withParsedBody($link);
         $response = $this->controller->postLink($request, new Response());
 
@@ -252,7 +252,7 @@ class PostLinkTest extends TestCase
             'CONTENT_TYPE' => 'application/json'
         ]);
 
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $request = $request->withParsedBody($link);
         $response = $this->controller->postLink($request, new Response());
 
@@ -276,7 +276,7 @@ class PostLinkTest extends TestCase
             'CONTENT_TYPE' => 'application/json'
         ]);
 
-        $request = Request::createFromEnvironment($env);
+        $request = ServerRequestInterface::createFromEnvironment($env);
         $request = $request->withParsedBody($link);
         $response = $this->controller->postLink($request, new Response());
 

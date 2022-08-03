@@ -9,7 +9,7 @@ use Shaarli\Front\Exception\WrongTokenException;
 use Shaarli\Plugin\PluginManager;
 use Shaarli\Security\SessionManager;
 use Shaarli\TestCase;
-use Slim\Http\Request;
+use Slim\Http\ServerRequest;
 use Slim\Http\Response;
 
 class PluginsControllerTest extends TestCase
@@ -51,7 +51,7 @@ class PluginsControllerTest extends TestCase
         $assignedVariables = [];
         $this->assignTemplateVars($assignedVariables);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $data = [
@@ -93,7 +93,7 @@ class PluginsControllerTest extends TestCase
             'plugin2' => 'on',
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParams')
@@ -132,7 +132,7 @@ class PluginsControllerTest extends TestCase
             'token' => 'this parameter should not be saved'
         ];
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $request
             ->expects(static::atLeastOnce())
             ->method('getParams')
@@ -164,7 +164,7 @@ class PluginsControllerTest extends TestCase
      */
     public function testSaveWithError(): void
     {
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->container->conf = $this->createMock(ConfigManager::class);
@@ -199,7 +199,7 @@ class PluginsControllerTest extends TestCase
         $this->container->sessionManager = $this->createMock(SessionManager::class);
         $this->container->sessionManager->method('checkToken')->willReturn(false);
 
-        $request = $this->createMock(Request::class);
+        $request = $this->createMock(ServerRequest::class);
         $response = new Response();
 
         $this->expectException(WrongTokenException::class);

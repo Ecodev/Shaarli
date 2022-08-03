@@ -36,7 +36,7 @@ if (! file_exists(__DIR__ . '/vendor/autoload.php')) {
 
 // Ensure the PHP version is supported
 try {
-    ApplicationUtils::checkPHPVersion('7.1', PHP_VERSION);
+    ApplicationUtils::checkPHPVersion('7.4', PHP_VERSION);
 } catch (Exception $exc) {
     header('Content-Type: text/plain; charset=utf-8');
     echo $exc->getMessage();
